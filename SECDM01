@@ -1,0 +1,283 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Thu Feb 10 09:22:54 2022
+
+@author: Matias
+"""
+
+
+import tkinter as tk
+
+
+#------------------------------------VENTANA PRINCIPAL-------------------------
+ventana = tk.Tk()
+ventana.title("Elena Casa de Moda")
+
+#------------------------------------FUNCION-----------------------------------
+
+#contAgregar = tk.IntVar()
+contAgregar = 1 # inicia en 1 para no tapar los titulos
+
+def funAgregar():
+    """
+    Cada vez que se apreta el Boton Agregar suma una Fila con celdas con info
+    extraida el GIU
+
+    Returns
+    -------
+    None.
+
+    """
+    
+    global contAgregar # si no la defino global no sabe que valor tomar, y si lo defino cada vez que se invoque la funcion toma ese valor
+    
+    if ""  != ((ntrFecha.get()) and ntrTemporada.get() and ntrAno.get() and ntrCodigo.get() and ntrDescripcion.get() and ntrPrenda.get() and ntrTalle.get() and ntrTotal.get()):
+    
+        ntrPosCelda = tk.Entry(frameCeldas, justify="right", width = 5)
+        ntrPosCelda.grid(row = contAgregar, column = 0)
+        ntrPosCelda.insert(1,contAgregar) #requiere agregar una posicion
+        ntrPosCelda.config(state="readonly") #solo lectura despues de agregar el dato pos
+        
+        ntrFechaCelda = tk.Entry(frameCeldas, justify="right", width = 11)      #creo celda
+        ntrFechaCelda.grid(row = contAgregar, column = 1)                       #ubicacion
+        ntrFechaCelda.insert(1,ntrFecha.get())                                  #copio el contenido de la GIU fecha
+        ntrFechaCelda.config(state="readonly")                                  #lo bloque para que el usuario no la modifique
+        ntrFecha.delete(0, "end")                                               #borro el contenido del entry GIU para que puedan agregar uno nuevo
+    
+        ntrTemporadaCelda = tk.Entry(frameCeldas, justify="right", width = 11)
+        ntrTemporadaCelda.grid(row = contAgregar, column = 2)
+        ntrTemporadaCelda.insert(1,ntrTemporada.get())
+        ntrTemporadaCelda.config(state="readonly")
+        ntrTemporada.delete(0, "end")
+        
+        ntrAnoCelda = tk.Entry(frameCeldas, justify="right", width = 5)
+        ntrAnoCelda.grid(row = contAgregar, column = 3)
+        ntrAnoCelda.insert(1,ntrAno.get())
+        ntrAnoCelda.config(state="readonly")
+        ntrAno.delete(0, "end")
+        
+        ntrCodigoCelda = tk.Entry(frameCeldas, justify="right")
+        ntrCodigoCelda.grid(row = contAgregar, column = 4)
+        ntrCodigoCelda.insert(1,ntrCodigo.get())
+        ntrCodigoCelda.config(state="readonly")
+        ntrCodigo.delete(0, "end")
+        
+        ntrDescripcionCelda = tk.Entry(frameCeldas, justify="right")
+        ntrDescripcionCelda.grid(row = contAgregar, column = 5)
+        ntrDescripcionCelda.insert(1,ntrDescripcion.get())
+        ntrDescripcionCelda.config(state="readonly")
+        ntrDescripcion.delete(0, "end")
+        
+        ntrPrendaCelda = tk.Entry(frameCeldas, justify="right", width = 10)
+        ntrPrendaCelda.grid(row = contAgregar, column = 6)
+        ntrPrendaCelda.insert(1,ntrPrenda.get())
+        ntrPrendaCelda.config(state="readonly")
+        ntrPrenda.delete(0, "end")
+        
+        ntrTalleCelda = tk.Entry(frameCeldas, justify="right")
+        ntrTalleCelda.grid(row = contAgregar, column = 7)
+        ntrTalleCelda.insert(1,ntrTalle.get())
+        ntrTalleCelda.config(state="readonly")
+        ntrTalle.delete(0, "end")
+        
+        ntrTotalCelda = tk.Entry(frameCeldas, justify="right", width = 5)
+        ntrTotalCelda.grid(row = contAgregar, column = 8)
+        ntrTotalCelda.insert(1,ntrTotal.get())
+        ntrTotalCelda.config(state="readonly")
+        ntrTotal.delete(0, "end")
+        
+        contAgregar += 1
+
+    else:
+        print("celda vacia")
+        
+
+def funBorrar():
+    
+    ventanaBorrar = tk.Toplevel(ventana)
+    
+    ntrVentanaBorrar = tk.Entry(ventanaBorrar, justify = "right")
+    ntrVentanaBorrar.grid(row = 0, column = 0)
+    
+    btnVentanaBorrar = tk.Button(ventanaBorrar, text = "Eliminar celda", command = lambda: funEliminarCelda)
+    btnVentanaBorrar.grid(row = 0, column =1)
+    
+    
+
+def funEliminarCelda():
+    
+    ntrVentanaBorrar = 0
+    
+    borrarPos = ntrVentanaBorrar.get()
+    
+    try:
+        
+        if borrarPos == ntrPosCelda.get():
+            
+            ntrFechaCelda = tk.Entry(frameCeldas, justify="right", width = 11)
+            ntrFechaCelda.grid(row = borrarPos, column = 1)
+            ntrFechaCelda.insert(1, "ELMINADO")
+            ntrFechaCelda.config(state="readonly")
+        
+            ntrTemporadaCelda = tk.Entry(frameCeldas, justify="right", width = 11)
+            ntrTemporadaCelda.grid(row = borrarPos, column = 2)
+            ntrTemporadaCelda.insert(1, "ELMINADO")
+            ntrTemporadaCelda.config(state="readonly")
+            
+            ntrAnoCelda = tk.Entry(frameCeldas, justify="right", width = 5)
+            ntrAnoCelda.grid(row = borrarPos, column = 3)
+            ntrAnoCelda.insert(1, "ELMINADO")
+            ntrAnoCelda.config(state="readonly")
+            
+            ntrCodigoCelda = tk.Entry(frameCeldas, justify="right")
+            ntrCodigoCelda.grid(row = borrarPos, column = 4)
+            ntrCodigoCelda.insert(1, "ELMINADO")
+            ntrCodigoCelda.config(state="readonly")
+            
+            ntrDescripcionCelda = tk.Entry(frameCeldas, justify="right")
+            ntrDescripcionCelda.grid(row = borrarPos, column = 5)
+            ntrDescripcionCelda.insert(1, "ELMINADO")
+            ntrDescripcionCelda.config(state="readonly")
+            
+            ntrPrendaCelda = tk.Entry(frameCeldas, justify="right", width = 10)
+            ntrPrendaCelda.grid(row = borrarPos, column = 6)
+            ntrPrendaCelda.insert(1, "ELMINADO")
+            ntrPrendaCelda.config(state="readonly")
+            
+            ntrTalleCelda = tk.Entry(frameCeldas, justify="right")
+            ntrTalleCelda.grid(row = borrarPos, column = 7)
+            ntrTalleCelda.insert(1, "ELMINADO")
+            ntrTalleCelda.config(state="readonly")
+            
+            ntrTotalCelda = tk.Entry(frameCeldas, justify="right", width = 5)
+            ntrTotalCelda.grid(row = borrarPos, column = 8)
+            ntrTotalCelda.insert(1, "ELMINADO")
+            ntrTotalCelda.config(state="readonly")
+        
+    except:
+            
+        print("no pude")
+                
+        
+        
+    
+    
+    
+
+
+
+#------------------------------------FRAME-----------------------------------
+
+# Frame de textos y entrys
+
+GIU = tk.Frame(ventana)
+GIU.config(width="800", height="600", relief = "solid", bd = 2)
+GIU.grid(row = 0, column = 0)
+
+# Frame de celdas
+
+frameCeldas = tk.Frame(ventana)
+frameCeldas.config(width = "800", height = "600",relief = "solid", bd = 2)
+frameCeldas.grid(row = 2, column = 0) 
+
+frameBotones = tk.Frame(ventana)
+frameBotones.config(width = "800", height = "600",relief = "solid", bd = 2)
+frameBotones.grid(row = 1, column = 0)
+
+#------------------------------------TEXTOS-----------------------------------
+
+lblFecha = tk.Label(GIU, text = "fecha")
+lblFecha.grid(row = 0, column = 0, sticky = "w", padx = 10, pady = 10)
+
+lblTemporada = tk.Label(GIU, text = "Temporada")
+lblTemporada.grid(row = 0, column = 2, sticky = "w", padx = 10, pady = 10)
+
+lblAno = tk.Label(GIU, text = "Año")
+lblAno.grid(row = 0, column = 4, sticky = "w", padx = 10, pady = 10)
+
+lblCodigo = tk.Label(GIU, text = "Codigo")
+lblCodigo.grid(row = 1, column = 0, sticky = "w", padx = 10, pady = 10)
+
+lblDescripcion = tk.Label(GIU, text = "Descripcion")
+lblDescripcion.grid(row = 1, column = 2, sticky = "w", padx = 10, pady = 10)
+
+lblPrenda = tk.Label(GIU, text = "Prenda")
+lblPrenda.grid(row = 2, column = 0, sticky = "w", padx = 10, pady = 10)
+
+lblTalle = tk.Label(GIU, text = "Talle")
+lblTalle.grid(row = 2, column = 2, sticky = "w", padx = 10, pady = 10)
+
+lblTotal = tk.Label(GIU, text = "Total")
+lblTotal.grid(row = 2, column = 4, sticky = "w", padx = 10, pady = 10)
+
+#------------------------------------TEXTOS Entry-----------------------------------
+
+ntrFecha = tk.Entry(GIU)
+ntrFecha.grid(row = 0, column = 1)
+
+ntrTemporada = tk.Entry(GIU)
+ntrTemporada.grid(row = 0, column = 3)
+
+ntrAno = tk.Entry(GIU)
+ntrAno.grid(row = 0, column = 5)
+
+ntrCodigo = tk.Entry(GIU)
+ntrCodigo.grid(row = 1, column = 1)
+
+ntrDescripcion = tk.Entry(GIU)
+ntrDescripcion.grid(row = 1, column = 3)
+
+ntrPrenda = tk.Entry(GIU)
+ntrPrenda.grid(row = 2, column = 1)
+
+ntrTalle = tk.Entry(GIU)
+ntrTalle.grid(row = 2, column = 3)
+
+ntrTotal = tk.Entry(GIU)
+ntrTotal.grid(row = 2, column = 5)
+
+
+#------------------------------------BOTONES-----------------------------------
+
+
+btnAgregar = tk.Button(frameBotones, text = "Agregar", padx = 10, pady = 10, command = lambda: funAgregar())
+btnAgregar.grid(row = 0, column = 0)
+
+btnBorrar = tk.Button(frameBotones, text = "Borrar", padx = 10, pady = 10, command = lambda: funBorrar())
+btnBorrar.grid(row = 0, column = 1)
+
+
+#------------------------------------PANEL CELDAS TEXTOS-----------------------------------
+
+lblPos = tk.Label(frameCeldas, text = "Pos")
+lblPos.grid(row = 0, column = 0)
+
+lblFecha = tk.Label(frameCeldas, text = "Fecha")
+lblFecha.grid(row = 0, column = 1)
+
+lblTemporada = tk.Label(frameCeldas, text = "Temporada")
+lblTemporada.grid(row = 0, column = 2)
+
+lblAno = tk.Label(frameCeldas, text = "Año")
+lblAno.grid(row = 0, column = 3)
+
+lblCodigo = tk.Label(frameCeldas, text = "Codigo")
+lblCodigo.grid(row = 0, column = 4)
+
+lblDescripcion = tk.Label(frameCeldas, text = "Descripcion")
+lblDescripcion.grid(row = 0, column = 5)
+
+lblPrenda = tk.Label(frameCeldas, text = "Prenda")
+lblPrenda.grid(row = 0, column = 6)
+
+
+lblTalle = tk.Label(frameCeldas, text = "Talle")
+lblTalle.grid(row = 0, column = 7)
+
+lblTotal = tk.Label(frameCeldas, text = "Total")
+lblTotal.grid(row = 0, column = 8)
+
+#-----------------------------------------PANEL CELDAS ENTRY--------------------------------
+
+
+ventana.mainloop()
